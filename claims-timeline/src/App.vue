@@ -7,7 +7,6 @@
 
 <script>
 import header from "./components/header.vue";
-import policyDisplay from "./components/policyDisplay.vue";
 
 export default {
   components: {
@@ -23,6 +22,6 @@ export default {
 <style>
 body {
   margin: 0;
-  font-family: "Nunito SemiBold";
+  font-family: "Source Serif Pro", serif;
 }
 </style>

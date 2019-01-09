@@ -1,31 +1,47 @@
 <template>
   <div>
-    <h1>Policy {{id}}</h1>
-    <button>EDIT POLICY INFO</button>
-    <button>ADD NEW CLAIM</button>
-    <h2>
-      Status:
-      <span v-if="status === 'Expired'" class="red-status">{{status}}</span>
-    </h2>
-    <h2>
-      Status:
-      <span v-if="status === 'In Effect'" class="green-status">{{status}}</span>
-    </h2>
-    <h2>{{named_insured}}</h2>
-    <h2>{{insured_location}}</h2>
-    <p>Type: {{policy_type}}</p>
-    <p>Policy Limit: ${{policy_limit}}</p>
-    <p>Deductible: ${{deductible}}</p>
-    <timeline
-      v-if="items.length > 0"
-      ref="timeline"
-      :items="items"
-      :groups="groups"
-      :options="options"
-    ></timeline>
-    <h2>Claims:</h2>
-    <div v-for="(claim, index) in claims_elements" :key="index">
-      <router-link :to="'/claim/' + claim" exact>{{claim}}</router-link>
+    <div class="policy-info">
+      <div class="mybuttons">
+        <router-link class="button-b" :to="'/edit_policy'" exact>EDIT POLICY INFO</router-link>
+        <router-link class="button-g" :to="'/new_claim'" exact>ADD NEW CLAIM</router-link>
+      </div>
+      <h1>Policy: {{id}}</h1>
+      <h3>{{named_insured}}</h3>
+      <h3>{{insured_location}}</h3>
+      <h4 v-if="status === 'Expired'">
+        Status:
+        <span class="red-status">{{status}}</span>
+      </h4>
+      <h4 v-if="status === 'In Effect'">
+        Status:
+        <span class="green-status">{{status}}</span>
+      </h4>
+      <b>
+        <p>Type: {{policy_type}}</p>
+      </b>
+      <b>
+        <p>Policy Limit: ${{policy_limit}}</p>
+      </b>
+      <b>
+        <p>Deductible: ${{deductible}}</p>
+      </b>
+      <timeline
+        v-if="items.length > 0"
+        ref="timeline"
+        :items="items"
+        :groups="groups"
+        :options="options"
+      ></timeline>
+      <br>
+      <h2>Claims:</h2>
+      <div v-for="(claim, index) in claims_elements" :key="index">
+        <router-link class="claimButton" :to="'/claim/' + claim" exact>
+          Claim:
+          <i>{{claim}}</i>
+        </router-link>
+        <br>
+        <br>
+      </div>
     </div>
   </div>
 </template>
@@ -77,7 +93,7 @@ export default {
             this.items.push({
               id: timelineIndex,
               group: 0,
-              content: data.body.policy.policy_number + " in effect.",
+              content: "In Effect",
               start: new Date(event.startDate),
               end: new Date(event.endDate),
               className: "timeline-policy-period"
@@ -123,8 +139,39 @@ export default {
 </script>
 
 <style scoped>
+.mybuttons {
+  margin-bottom: 1em;
+  float: right;
+}
+.button-b {
+  background-color: #3467c2;
+  padding: 0.5em;
+  margin-left: 1em;
+  border-radius: 5px;
+  color: white;
+}
+.button-g {
+  background-color: green;
+  padding: 0.5em;
+  margin-left: 1em;
+  border-radius: 5px;
+  color: white;
+}
+.claimButton {
+  background-color: darkorange;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+  padding: 0.5em;
+  margin: 2em;
+  border-radius: 5px;
+  color: white;
+}
+.policy-info {
+  margin: 1em;
+}
 .red-status {
-  color: red;
+  color: darkred;
 }
 .green-status {
   color: green;
@@ -135,16 +182,19 @@ export default {
 .timeline-policy-period {
   color: white;
   background-color: purple;
-  border-color: darkmagenta;
+  border-color: black;
+  text-align: center;
 }
 .timeline-policy-event {
   color: white;
-  background-color: blue;
-  border-color: darkblue;
+  background-color: darkred;
+  border-color: black;
+  text-align: center;
 }
 .timeline-claim {
   color: white;
-  background-color: green;
-  border-color: darkgreen;
+  background-color: darkorange;
+  border-color: black;
+  text-align: center;
 }
 </style>

@@ -1,31 +1,43 @@
 <template>
   <div>
-    <div>
-      <router-link :to="'/policy/' + policy_number" exact>Back To Policy {{policy_number}}</router-link>
+    <div class="claim-info">
+      <div class="mybuttons">
+        <router-link
+          class="back-button"
+          :to="'/policy/' + policy_number"
+          exact
+        >Back to policy {{policy_number}}</router-link>
+        <router-link class="button-b" :to="'/edit_claim'" exact>EDIT CLAIM INFO</router-link>
+      </div>
+      <br>
+      <h1>Claim: {{id}}</h1>
+      <h3>{{named_insured}}</h3>
+      <h3>{{insured_location}}</h3>
+      <h4 v-if="status === 'CLOSED'">
+        Status:
+        <span class="red-status">{{status}}</span>
+      </h4>
+      <h4 v-if="status === 'OPEN'">
+        Status:
+        <span class="green-status">{{status}}</span>
+      </h4>
+      <b>
+        <p>Type: {{policy_type}}</p>
+      </b>
+      <b>
+        <p>Policy Limit: ${{policy_limit}}</p>
+      </b>
+      <b>
+        <p>Deductible: ${{deductible}}</p>
+      </b>
+      <timeline
+        v-if="items.length > 0"
+        ref="timeline"
+        :items="items"
+        :groups="groups"
+        :options="options"
+      ></timeline>
     </div>
-    <button>EDIT CLAIM</button>
-    <button>ADD EVENT</button>
-    <h1>Claim {{id}}</h1>
-    <h2>
-      Status:
-      <span v-if="status === 'CLOSED'" class="red-status">{{status}}</span>
-    </h2>
-    <h2>
-      Status:
-      <span v-if="status === 'OPEN'" class="green-status">{{status}}</span>
-    </h2>
-    <h2>Insured: {{named_insured}}</h2>
-    <h2>{{insured_location}}</h2>
-    <p>Type: {{policy_type}}</p>
-    <p>Policy Limit: ${{policy_limit}}</p>
-    <p>Deductible: ${{deductible}}</p>
-    <timeline
-      v-if="items.length > 0"
-      ref="timeline"
-      :items="items"
-      :groups="groups"
-      :options="options"
-    ></timeline>
   </div>
 </template>
 
@@ -96,7 +108,7 @@ export default {
             group: 1,
             content: event.event_type.toUpperCase() + ": " + event.description,
             start: new Date(event.startDate),
-            className: "timeline-policy-period"
+            className: "timeline-claim-event"
           });
           timelineIndex++;
         });
@@ -106,29 +118,45 @@ export default {
 </script>
 
 <style scoped>
+.mybuttons {
+  margin-bottom: 1em;
+  float: right;
+}
+.button-b {
+  background-color: #3467c2;
+  padding: 0.5em;
+  margin-left: 1em;
+  border-radius: 5px;
+  color: white;
+}
+.back-button {
+  background-color: darkred;
+  padding: 0.5em;
+  margin-left: 1em;
+  border-radius: 5px;
+  color: white;
+}
 .red-status {
-  color: red;
+  color: darkred;
 }
 .green-status {
   color: green;
+}
+.claim-info {
+  margin: 1em;
 }
 </style>
 
 
 <style>
-.timeline-policy-period {
+.timeline-claim-event {
   color: white;
-  background-color: purple;
-  border-color: darkmagenta;
-}
-.timeline-policy-event {
-  color: white;
-  background-color: blue;
-  border-color: darkblue;
+  background-color: darkred;
+  border-color: black;
 }
 .timeline-claim {
   color: white;
-  background-color: green;
-  border-color: darkgreen;
+  background-color: darkorange;
+  border-color: black;
 }
 </style>
