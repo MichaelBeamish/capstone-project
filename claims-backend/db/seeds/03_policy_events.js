@@ -20,6 +20,12 @@ exports.seed = function(knex, Promise) {
         },
         {
           policy_id: 1,
+          event_type: "policyUpdate",
+          description: "Policy limits increased from $280,000 to $400,000.",
+          startDate: "2016-12-09"
+        },
+        {
+          policy_id: 1,
           event_type: "policyPeriod",
           description: "Policy period.",
           startDate: "2018-02-15",

@@ -1,7 +1,7 @@
 <template>
   <nav>
     <span class="icon-container">
-      <img class="logo" src="src/assets/insurance.png">
+      <img class="logo" src="../assets/insurance.png">
       <span class="title">Safe Hands Insurance</span>
       <span class="reserved">®</span>
     </span>

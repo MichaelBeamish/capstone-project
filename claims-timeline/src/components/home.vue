@@ -6,7 +6,7 @@
     <br>
     <br>
     <h1>
-      <u>Welcome to Safe Hands Policy Viewer</u>
+      <u>Welcome to Safe Hands Policy Timeline</u>
     </h1>
     <h3>To begin search for a policy or a claim...</h3>
     <div class="center">

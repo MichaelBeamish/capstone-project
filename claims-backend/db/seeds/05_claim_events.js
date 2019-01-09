@@ -10,6 +10,12 @@ exports.seed = function(knex, Promise) {
           event_type: "payment",
           description: "Tree removal.",
           startDate: "2014-12-30"
+        },
+        {
+          claim_id: 3,
+          event_type: "contact",
+          description: "Explained no coverage.",
+          startDate: "2017-10-16"
         }
       ]);
     });

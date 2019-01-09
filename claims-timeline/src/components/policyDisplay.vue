@@ -126,7 +126,7 @@ export default {
           this.items.push({
             id: claim.claim_number,
             group: 2,
-            content: "Claim " + claim.claim_number + " filed.",
+            content: "Claim " + claim.claim_number + " DOL.",
             start: new Date(claim.date_of_loss),
             className: "timeline-claim"
           });
